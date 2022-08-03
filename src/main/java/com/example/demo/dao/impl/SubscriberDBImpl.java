@@ -35,6 +35,30 @@ public class SubscriberDBImpl implements SubscriberDB {
     }
 
     @Override
+    public Subscriber findSubcriberById(int id) {
+        Connection connection = null;
+        Subscriber subscriber = null;
+        try {
+            connection = ConnectionDB.INSTANCE.getConnection();
+            String query = "SELECT * FROM subscribers WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                subscriber = new Subscriber();
+                subscriber.setId(rs.getInt("id"));
+                subscriber.setPhone(rs.getString("phone"));
+                subscriber.setBlocked(rs.getInt("is_blocked") == 1 ? true : false);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.INSTANCE.close(connection);
+        }
+        return subscriber;
+    }
+
+    @Override
     public boolean deactivateSubscriber(String phone) {
         Connection connection = null;
         try {

@@ -9,5 +9,7 @@ public interface SubscriberDB {
 
     Subscriber findSubcriberByPhone(String phone);
 
+    Subscriber findSubcriberById(int id);
+
     boolean deactivateSubscriber(String phone);
 }

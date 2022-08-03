@@ -8,5 +8,5 @@ public interface MessageService {
 
     MessageService INSTANCE = new MessageServiceImpl();
 
-    boolean sendMessage(Message message);
+    boolean sendMessage(String messageText, String recPhone, String senPhone);
 }

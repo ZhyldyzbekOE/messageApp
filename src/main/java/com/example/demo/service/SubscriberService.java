@@ -9,7 +9,8 @@ public interface SubscriberService {
 
     Subscriber findSubscriberByPhone(String phone);
 
-    boolean deactivateSubscriber(String phone);
+    Subscriber findSubscriberById(int id);
 
+    boolean deactivateSubscriber(String phone);
 
 }
