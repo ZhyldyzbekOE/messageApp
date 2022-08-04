@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo.controller.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.HelloController">
+   <children>
+      <Button fx:id="btnSend" layoutX="138.0" layoutY="248.0" mnemonicParsing="false" onAction="#sendMessageAction" text="Отправить" />
+      <TextField fx:id="txtSenderId" layoutX="101.0" layoutY="84.0" promptText="Номер отправителя" />
+      <TextField fx:id="txtRecipientId" layoutX="101.0" layoutY="135.0" promptText="Номер получателя" />
+      <TextField fx:id="txtMsgText" layoutX="101.0" layoutY="191.0" promptText="Текст" />
+   </children>
+</AnchorPane>

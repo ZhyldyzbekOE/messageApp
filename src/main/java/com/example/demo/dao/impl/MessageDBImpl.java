@@ -45,4 +45,25 @@ public class MessageDBImpl implements MessageDB {
         }
         return messageList;
     }
+
+    @Override
+    public boolean saveMessagesIntoDb(String messageText, Subscriber sender, Subscriber recipient) {
+        Connection connection = null;
+        try {
+            connection = ConnectionDB.INSTANCE.getConnection();
+            String query = "INSERT INTO messages (msg_text, recipient_id, sender_id, msg_date)" +
+                    " VALUES(?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, messageText);
+            ps.setInt(2, recipient.getId());
+            ps.setInt(3, sender.getId());
+            ps.setString(4, LocalDateTime.now().toString());
+            return ps.executeUpdate() >= 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.INSTANCE.close(connection);
+        }
+        return false;
+    }
 }

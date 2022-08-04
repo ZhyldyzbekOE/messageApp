@@ -9,4 +9,6 @@ public interface MessageService {
     MessageService INSTANCE = new MessageServiceImpl();
 
     boolean sendMessage(String messageText, String recPhone, String senPhone);
+
+    boolean saveMessages(String messageText, Subscriber sender, Subscriber recipient);
 }
