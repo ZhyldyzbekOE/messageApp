@@ -39,11 +39,7 @@ public class Subscriber {
 
     @Override
     public String toString() {
-        return "Subscriber{" +
-                "id=" + id +
-                ", isBlocked=" + isBlocked +
-                ", phone='" + phone + '\'' +
-                '}';
+        return phone ;
     }
 
 

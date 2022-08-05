@@ -14,4 +14,6 @@ public interface MessageDB {
 
     boolean saveMessagesIntoDb(String messageText, Subscriber sender, Subscriber recipient);
 
+    List<Message> getListMessagesByPhone(String phone);
+
 }

@@ -66,4 +66,31 @@ public class MessageDBImpl implements MessageDB {
         }
         return false;
     }
+
+    @Override
+    public List<Message> getListMessagesByPhone(String phone) {
+        Connection connection = null;
+        List<Message> messageList = new ArrayList<>();
+        try {
+            connection = ConnectionDB.INSTANCE.getConnection();
+            String query = "SELECT m.msg_date, m.msg_text, m.sender_id FROM messages m " +
+                    "INNER JOIN subscribers s " +
+                    "ON m.recipient_id = s.id WHERE s.phone = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, phone);
+            ResultSet rs =  ps.executeQuery();
+            while (rs.next()) {
+                Message item = new Message();
+                item.setMsgDate(LocalDateTime.parse(rs.getString(1)));
+                item.setMsgText(rs.getString(2));
+                item.setSender(SubscriberService.INSTANCE.findSubscriberById(rs.getInt(3)));
+                messageList.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.INSTANCE.close(connection);
+        }
+        return messageList;
+    }
 }

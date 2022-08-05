@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ListController">
+   <children>
+      <TableView fx:id="tblList" prefHeight="350.0" prefWidth="593.0">
+        <columns>
+          <TableColumn fx:id="clmText" prefWidth="135.20000916719437" text="Текст" />
+          <TableColumn fx:id="clmDate" minWidth="0.0" prefWidth="148.8000030517578" text="Дата" />
+            <TableColumn fx:id="clmSender" prefWidth="175.99997558593748" text="Отправитель" />
+            <TableColumn fx:id="clmSenderId" prefWidth="131.20003662109377" text="ID Отправителя" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

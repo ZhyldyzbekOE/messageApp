@@ -5,13 +5,17 @@ import com.example.demo.exception.SubcriberLimitException;
 import com.example.demo.exception.SubscriberBlockedException;
 import com.example.demo.exception.SubscriberNotFoundException;
 import com.example.demo.model.Message;
+import com.example.demo.model.MessageInfo;
 import com.example.demo.model.Subscriber;
 import com.example.demo.service.MessageService;
 import com.example.demo.service.SubscriberService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MessageServiceImpl implements MessageService {
 
@@ -36,6 +40,23 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public boolean saveMessages(String messageText, Subscriber sender, Subscriber recipient) {
         return MessageDB.INSTANCE.saveMessagesIntoDb(messageText, sender, recipient);
+    }
+
+    @Override
+    public List<MessageInfo> showListsByPhone(String phone) {
+        List<Message> messageList = MessageDB.INSTANCE.getListMessagesByPhone(phone);
+        List<MessageInfo> messageInfos = new ArrayList<>();
+        for (Message item: messageList) {
+            MessageInfo itemInfo = new MessageInfo(
+                    item.getMsgText(),
+                    item.getMsgDate(),
+                    item.getSender().getPhone(),
+                    item.getSender().getId()
+            );
+
+            messageInfos.add(itemInfo);
+        }
+        return messageInfos;
     }
 
     private boolean validationData(List<Message> messageList, Subscriber recipient) {
